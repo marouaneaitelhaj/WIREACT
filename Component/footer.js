@@ -5,30 +5,35 @@ import { faP } from "@fortawesome/free-solid-svg-icons/faP";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons/faClockRotateLeft";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-
-export default function Footer({ navigation }) {
+import tw from "tailwind-react-native-classnames";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Maps from "./maps";
+import DetailsScreen from "./deatsils";
+export default function Footer() {
+  const Tab = createMaterialBottomTabNavigator();
   return (
-    <View style={styles.footer}>
-      <FontAwesomeIcon   style={{color:"gray"}} icon={faPaperPlane} />
-      <FontAwesomeIcon style={{color:"gray"}} icon={faBookmark} />
-      <FontAwesomeIcon style={{color:"gray"}} icon={faP} />
-      <FontAwesomeIcon style={{color:"gray"}} icon={faClockRotateLeft} />
-      <FontAwesomeIcon style={{color:"gray"}} icon={faUser} />
+    <View
+      style={tw.style(
+        "bg-white",
+        "w-full",
+        "flex",
+        "flex-row",
+        "absolute",
+        "justify-between",
+        "bottom-0",
+        "py-4",
+        "px-4"
+      )}
+    >
+      <FontAwesomeIcon style={tw.style("text-gray-500")} icon={faPaperPlane} />
+      <FontAwesomeIcon style={tw.style("text-gray-500")} icon={faBookmark} />
+      <FontAwesomeIcon style={tw.style("text-gray-500")} icon={faP} />
+      <FontAwesomeIcon style={tw.style("text-gray-500")} icon={faClockRotateLeft} />
+      <FontAwesomeIcon style={tw.style("text-gray-500")} icon={faUser} />
+      <Tab.Navigator style={tw.style("")}>
+        <Tab.Screen name="Home" component={Maps} />
+        <Tab.Screen name="Details" component={DetailsScreen} />
+      </Tab.Navigator>
     </View>
-    
   );
 }
-const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: "white",
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    position: "absolute",
-    bottom: 0,
-    paddingTop: 20,
-    paddingBottom: 20,
-    
-  },
-});
