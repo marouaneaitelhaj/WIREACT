@@ -11,37 +11,44 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 // import component
 import BookingScreen from "./Component/Booking";
 import SearchParking from "./Component/SearchParking";
 import HistoryScreen from "./Component/History";
 import ProfileScreen from "./Component/Profile";
 import Maps from "./Component/maps";
-import { useTheme } from 'react-native-paper';
-
+import { useTheme } from "react-native-paper";
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default function App() {
   const theme = useTheme();
-// theme.colors.secondaryContainer = "transparent";
+  // theme.colors.secondaryContainer = "transparent";
   const Stack = createNativeStackNavigator();
   const Tab = createMaterialBottomTabNavigator();
+  const Top = createMaterialTopTabNavigator();
+  // const Drawer = createDrawerNavigator();
+
   return (
-    <NavigationContainer 
-    theme={
-      {
+    <NavigationContainer
+    
+      theme={{
         colors: {
-          secondaryContainer: 'transparent',
-        }
-      }
-    }
+          secondaryContainer: "transparent",
+        },
+      }}
     >
+      {/* <Drawer.Navigator>
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Article" component={Article} />
+    </Drawer.Navigator> */}
       <Tab.Navigator
         initialRouteName="Nearby"
         barStyle={{ backgroundColor: "#ffffff" }}
         activeColor="#24aaa1"
         inactiveColor="gray"
         shifting={true}
-         
       >
         <Tab.Screen
           options={{
@@ -54,8 +61,6 @@ export default function App() {
           component={Maps}
         />
         <Tab.Screen
-        
-
           options={{
             tabBarIcon: ({ color }) => (
               // <FontAwesomeIcon color={color} icon={faBookmark} />
@@ -78,7 +83,11 @@ export default function App() {
         <Tab.Screen
           options={{
             tabBarIcon: ({ color, size }) => (
-              <FontAwesomeIcon color={color} size={26} icon={faClockRotateLeft} />
+              <FontAwesomeIcon
+                color={color}
+                size={26}
+                icon={faClockRotateLeft}
+              />
               // <Ionicons name="history" color={color} size={26} />
             ),
           }}
@@ -96,6 +105,10 @@ export default function App() {
           component={ProfileScreen}
         />
       </Tab.Navigator>
+      {/* <Top.Navigator>
+        <Top.Screen name="Nearby" component={BookingScreen} />
+        <Top.Screen name="Settings" component={Maps} />
+      </Top.Navigator> */}
     </NavigationContainer>
   );
 }
